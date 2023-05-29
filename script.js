@@ -127,11 +127,9 @@ const renderCards = () => {
 
     const frontElement = document.createElement('div');
     frontElement.classList.add('card__front');
-    frontElement.textContent = 'Front';
 
     const backElement = document.createElement('div');
     backElement.classList.add('card__back');
-    backElement.textContent = 'Back';
 
     cardElement.appendChild(frontElement);
     cardElement.appendChild(backElement);

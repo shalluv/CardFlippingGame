@@ -106,16 +106,15 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
   color: var(--charcoal);
 }
 
 .card__front {
-  background-color: var(--sandy-brown);
+  background-image: url('/images/card-front.png');
 }
 
 .card__back {
-  background-color: var(--burnt-sienna);
+  background-image: url('/images/card-back.png');
   transform: rotateY(180deg);
 }
 
