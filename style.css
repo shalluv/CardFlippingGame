@@ -89,7 +89,9 @@ button {
   margin: 1rem;
   perspective: 800px;
   transform-style: preserve-3d;
-  transition: transform 0.5s;
+  transition: transform cubic-bezier(0.4, 0, 0.2, 1) 1.2s,
+    scale cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+  transform-origin: center bottom;
 }
 
 .card__front,
@@ -117,12 +119,17 @@ button {
   transform: rotateY(180deg);
 }
 
-.card:not(.up) {
+.card--up {
+  cursor: pointer;
+}
+
+.card:not(.card--up) {
   transform: rotateY(180deg);
 }
 
-.removed {
-  opacity: 0;
+.card--removed {
+  pointer-events: none;
+  scale: 0;
 }
 
 .alert {
@@ -139,7 +146,8 @@ button {
 }
 
 .hidden {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .unsolvable > span {

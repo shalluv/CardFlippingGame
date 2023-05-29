@@ -52,9 +52,9 @@ const undo = () => {
   }
   cards = [...history[historyIndex]];
   historyIndex -= 1;
-  renderCards();
 
   checkWin();
+  renderCards();
 };
 
 const checkWin = () => {
@@ -85,7 +85,16 @@ const removeCard = (index) => {
     cards[index + 1] = cards[index + 1] === 'up' ? 'down' : 'up';
   }
 
-  renderCards();
+  const cardElements = document.querySelectorAll('.card');
+  cardElements[index].classList.add('card--removed');
+  cardElements[index].classList.remove('card--up');
+
+  if (index > 0 && cards[index - 1] !== 'removed') {
+    cardElements[index - 1].classList.toggle('card--up');
+  }
+  if (index < cards.length - 1 && cards[index + 1] !== 'removed') {
+    cardElements[index + 1].classList.toggle('card--up');
+  }
 
   checkWin();
 };
@@ -98,10 +107,10 @@ const renderCards = () => {
     const cardElement = document.createElement('div');
     cardElement.classList.add('card');
     cardElement.dataset.index = index;
-    cardElement.classList.add(card);
+    if (card !== 'down') cardElement.classList.add(`card--${card}`);
 
     cardElement.addEventListener('click', () => {
-      if (card !== 'up') return;
+      if (cards[index] !== 'up') return;
       if (!isPlaying) return;
 
       removeCard(index);
@@ -132,6 +141,7 @@ const startGame = () => {
   historyIndex = 0;
 
   isPlaying = true;
+  checkWin();
   renderCards();
 };
 
