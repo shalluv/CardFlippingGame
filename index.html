@@ -16,19 +16,13 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <header class="header">
-      <button class="header__button" id="newgame-button" onclick="startGame()">
-        New Game
-      </button>
+      <button class="header__button" id="new-game-button">New Game</button>
       <h1 class="header__title">Card Flipping Game</h1>
-      <button class="header__button" id="undo-button" onclick="undo()">
-        Undo
-      </button>
+      <button class="header__button" id="undo-button">Undo</button>
     </header>
     <main class="main" id="root"></main>
     <p class="unsolvable" id="unsolvable">
-      <span style="text-decoration: underline" onclick="unsolvable()"
-        >Click here</span
-      >
+      <span style="text-decoration: underline">Click here</span>
       if you think this is unsolvable
     </p>
     <div class="scroll-input">
@@ -39,11 +33,18 @@
         value="5"
         class="scroll-input__input"
         id="scroll-input"
-        oninput="updateScrollInput()"
       />
       <label for="scroll-input" class="scroll-input__label"
-        >Number of cards: <span id="scroll-input__value">5</span></label
-      >
+        >Number of cards:
+        <input
+          type="number"
+          id="scroll-value"
+          value="5"
+          max="10"
+          min="1"
+          class="scroll-input__number-input"
+        />
+      </label>
     </div>
     <div id="win-alert" class="alert hidden">You win!</div>
     <div id="lose-alert" class="alert hidden">You lose!</div>

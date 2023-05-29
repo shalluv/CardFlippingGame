@@ -172,6 +172,21 @@ button {
   align-items: center;
 }
 
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.scroll-input__number-input {
+  width: 4rem;
+  border-radius: 0.25rem;
+  border: 2px solid var(--charcoal);
+  background-color: var(--saffron);
+  color: var(--charcoal);
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
 #win-alert {
   background-color: var(--saffron);
   color: var(--charcoal);

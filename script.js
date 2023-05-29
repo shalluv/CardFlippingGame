@@ -1,7 +1,7 @@
 let cards = [];
 let history = [];
 let historyIndex = 0;
-let numberOfCards = 5;
+let numberOfCards = localStorage.getItem('numberOfCards') ?? 5;
 let isPlaying = false;
 
 const resetRendered = () => {
@@ -22,11 +22,20 @@ const showingResult = () => {
 
 const updateScrollInput = () => {
   const scrollInputElement = document.getElementById('scroll-input');
-  const scrollInputValueElement = document.getElementById(
-    'scroll-input__value'
-  );
-  scrollInputValueElement.innerText = scrollInputElement.value;
+  const scrollInputNumberInputElement = document.getElementById('scroll-value');
+  scrollInputNumberInputElement.value = scrollInputElement.value;
   numberOfCards = Number(scrollInputElement.value);
+
+  startGame();
+};
+
+const updateNumberInput = () => {
+  const scrollInputElement = document.getElementById('scroll-input');
+  const scrollNumberElement = document.getElementById('scroll-value');
+  if (scrollNumberElement.value < 1 || scrollNumberElement.value > 10) return;
+
+  scrollInputElement.value = scrollNumberElement.value;
+  numberOfCards = Number(scrollNumberElement.value);
 
   startGame();
 };
@@ -145,4 +154,27 @@ const startGame = () => {
   renderCards();
 };
 
-startGame();
+window.addEventListener('beforeunload', () => {
+  localStorage.setItem('numberOfCards', JSON.stringify(numberOfCards));
+});
+
+window.onload = () => {
+  const undoButtonElement = document.getElementById('undo-button');
+  undoButtonElement.addEventListener('click', undo);
+
+  const newGameButtonElement = document.getElementById('new-game-button');
+  newGameButtonElement.addEventListener('click', startGame);
+
+  const unsolvableElement = document.getElementById('unsolvable');
+  unsolvableElement.addEventListener('click', unsolvable);
+
+  const scrollInputElement = document.getElementById('scroll-input');
+  const scrollNumberElement = document.getElementById('scroll-value');
+  scrollInputElement.value = scrollNumberElement.value = numberOfCards;
+  updateScrollInput();
+  updateNumberInput();
+  scrollInputElement.addEventListener('input', updateScrollInput);
+  scrollNumberElement.addEventListener('input', updateNumberInput);
+
+  startGame();
+};
