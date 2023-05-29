@@ -110,11 +110,11 @@ button {
 }
 
 .card__front {
-  background-image: url('/images/card-front.png');
+  background-image: url('./images/card-front.png');
 }
 
 .card__back {
-  background-image: url('/images/card-back.png');
+  background-image: url('./images/card-back.png');
   transform: rotateY(180deg);
 }
 
